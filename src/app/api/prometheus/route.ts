@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-export async function GET(request: Request) {
+export async function GET() {
   try {
     // In a real application, you would fetch data from Prometheus here.
     // For example, using a library like 'prom-client' or making HTTP requests
