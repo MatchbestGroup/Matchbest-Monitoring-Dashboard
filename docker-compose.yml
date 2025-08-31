@@ -65,4 +65,12 @@ services:
     ports:
       - "9100:9100"
 
+  blackbox_exporter:
+    image: prom/blackbox-exporter:latest
+    container_name: blackbox_exporter
+    ports:
+      - "9115:9115"
+    volumes:
+      - ./monitoring-config/blackbox.yml:/etc/blackbox_exporter/config.yml
+
 

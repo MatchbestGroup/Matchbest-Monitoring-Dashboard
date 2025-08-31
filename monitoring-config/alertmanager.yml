@@ -13,3 +13,12 @@ receivers:
     # Logs alerts to stdout (safe for testing)
     webhook_configs:
       - url: 'http://prometheus:9090'  # Or just leave empty if no real receiver
+  - name: 'email-receiver'
+    email_configs:
+      - to: 'diwakarmatchbest@gmail.com'  # Replace with your email
+        from: 'alert@matchbestsaathi.com'
+        smarthost: 'smtp.gmail.com:587'  # For Gmail
+        # smarthost: 'smtp-mail.outlook.com:587'  # For Outlook
+        auth_username: 'diwakarmatchbest@gmail.com'  # Your Gmail address
+        auth_password: 'your-app-password'  # Gmail app password (not regular password)
+        require_tls: true
