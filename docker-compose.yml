@@ -6,7 +6,7 @@ services:
       - "9090:9090"
     volumes:
       - ./monitoring-config/prometheus.yml:/etc/prometheus/prometheus.yml
-      - prometheus_data:/prometheus
+      - ./prometheus-data:/prometheus
 
   alertmanager:
     image: prom/alertmanager:latest
@@ -15,7 +15,7 @@ services:
       - "9093:9093"
     volumes:
       - ./monitoring-config/alertmanager.yml:/etc/alertmanager/alertmanager.yml
-      - alertmanager_data:/alertmanager
+      - ./alertmanager-data:/alertmanager
 
   loki:
     image: grafana/loki:latest
@@ -24,7 +24,7 @@ services:
       - "3100:3100"
     volumes:
       - ./monitoring-config/loki.yml:/etc/loki/loki.yml
-      - loki_data:/loki
+      - ./loki-data:/loki
 
   promtail:
     image: grafana/promtail:latest
@@ -57,7 +57,7 @@ services:
       - tempo
       - loki
     volumes:
-      - grafana_data:/var/lib/grafana
+      - ./grafana-data:/var/lib/grafana
 
   node_exporter:
     image: prom/node-exporter:latest
@@ -65,9 +65,4 @@ services:
     ports:
       - "9100:9100"
 
-volumes:
-  prometheus_data:
-  alertmanager_data:
-  loki_data:
-  grafana_data:
-  tempo_data:
+
