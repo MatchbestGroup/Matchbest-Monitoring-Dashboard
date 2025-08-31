@@ -1,0 +1,7 @@
+FROM prom/blackbox-exporter:latest
+
+USER root
+
+RUN apt-get update && apt-get install -y ca-certificates
+
+USER nobody

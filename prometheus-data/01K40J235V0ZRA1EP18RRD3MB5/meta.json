@@ -1,0 +1,17 @@
+{
+	"ulid": "01K40J235V0ZRA1EP18RRD3MB5",
+	"minTime": 1756634403756,
+	"maxTime": 1756641600000,
+	"stats": {
+		"numSamples": 1197793,
+		"numSeries": 7063,
+		"numChunks": 13509
+	},
+	"compaction": {
+		"level": 1,
+		"sources": [
+			"01K40J235V0ZRA1EP18RRD3MB5"
+		]
+	},
+	"version": 1
+}
