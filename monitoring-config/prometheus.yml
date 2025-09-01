@@ -40,6 +40,7 @@ scrape_configs:
     static_configs:
       - targets:
         - https://aimavs.com
+        - https://streamplay.ai
         - https://matchbest.ai
         - https://matchbestsoftware.com
         - https://maverickservices.in
@@ -50,6 +51,7 @@ scrape_configs:
         - https://ava.matchbestsoftware.com
         - https://mamacrunchglobal.com
         - https://maverickelitetech.com
+        - http://host.docker.internal:8080
     relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target

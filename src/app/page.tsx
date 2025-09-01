@@ -7,7 +7,7 @@ export default function Home() {
     {
       name: "Grafana",
       description: "Visualization & Dashboards",
-      link: "http://localhost:3000",
+      link: "http://localhost:3001",
       color: "from-blue-500 to-blue-600"
     },
     {
