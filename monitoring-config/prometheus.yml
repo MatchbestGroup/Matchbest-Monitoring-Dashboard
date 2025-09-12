@@ -47,6 +47,12 @@ scrape_configs:
       module: [http_2xx]
     static_configs:
       - targets:
+        - https://pingora.ai
+        - https://vitaay.ai
+        - https://gobill.ai
+        - https://healnova.ai
+        - https://tripbargain.com
+        - https://avasuite.ai
         - https://aimavs.com
         - https://streamplay.ai
         - https://matchbest.ai
