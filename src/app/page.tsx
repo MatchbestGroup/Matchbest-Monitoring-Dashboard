@@ -40,6 +40,19 @@ export default function Home() {
       link: "http://localhost:9080",
       color: "from-teal-500 to-teal-600"
     },
+    {
+      name: "Node Exporter",
+      description: "System Metrics",
+      link: "http://localhost:9100",
+      color: "from-yellow-500 to-yellow-600"
+    },
+    {
+      name: "Blackbox Exporter",
+      description: "Probe prometheus, Debug probe ,Metrics, HTTP, HTTPS, DNS, TCP and ICMP",
+      link: "http://localhost:9115",
+      color: "from--500 to-blue-600"
+    },
+    
   ];
 
   return (
@@ -69,7 +82,7 @@ export default function Home() {
           transition={{ duration: 1 }}
         >
           <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-pink-400 via-purple-500 to-blue-400 animate-gradient">
-            MatchbestGroup Saathi
+            MatchbestGroup 
           </h1>
           <p className="text-md sm:text-2xl font-semibold text-gray-200">
             Centralized dashboard for <span className="text-blue-400">monitoring your services</span>

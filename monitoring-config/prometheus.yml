@@ -33,6 +33,14 @@ scrape_configs:
     static_configs:
       - targets: ['blackbox_exporter:9115']
 
+  - job_name: 'aws_cloudwatch_exporter'
+    static_configs:
+      - targets: ['aws_cloudwatch_exporter:9106']
+
+  - job_name: 'ec2_apps'
+    static_configs:
+      - targets: ['13.62.68.3:9100', '16.16.93.222:9100', '51.20.117.90:9100']
+
   - job_name: 'website_probes'
     metrics_path: /probe
     params:

@@ -1,36 +1,77 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AWS Monitoring Setup Instructions
 
-## Getting Started
+This project includes a monitoring stack with Prometheus, Grafana, Loki, Tempo, and exporters. This document explains how to set up AWS monitoring using the CloudWatch Exporter.
 
-First, run the development server:
+## Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- AWS account with appropriate IAM permissions.
+- AWS Access Key ID and Secret Access Key.
+- Docker and Docker Compose installed.
+
+## AWS IAM Permissions
+
+Create an IAM user or role with the following permissions:
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "cloudwatch:GetMetricData",
+        "cloudwatch:ListMetrics",
+        "ec2:DescribeInstances",
+        "rds:DescribeDBInstances",
+        "elasticloadbalancing:DescribeLoadBalancers",
+        "lambda:ListFunctions",
+        "s3:ListBuckets",
+        "ec2:DescribeVolumes"
+      ],
+      "Resource": "*"
+    }
+  ]
+}
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Configuration
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Copy `.env.example` to `.env` and fill in your AWS credentials and region.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2. The AWS CloudWatch Exporter configuration is in `monitoring-config/aws_exporter.yml`. You can customize the metrics and namespaces as needed.
 
-## Learn More
+3. The `docker-compose.yml` includes the `aws_cloudwatch_exporter` service. It reads AWS credentials from environment variables.
 
-To learn more about Next.js, take a look at the following resources:
+4. Prometheus is configured to scrape metrics from the AWS CloudWatch Exporter on port 9106.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+5. Alerting rules for AWS services are added in `monitoring-config/prometheus_rules.yml`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+6. A Grafana dashboard for AWS monitoring is available in `monitoring-config/grafana_aws_dashboard.json`. Import it into Grafana to visualize AWS metrics.
 
-## Deploy on Vercel
+## Running
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Start the monitoring stack with:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+docker-compose up -d
+```
+
+Ensure your `.env` file is loaded in your environment or use a tool like `docker-compose --env-file .env up -d`.
+
+## Customization
+
+- Modify `monitoring-config/aws_exporter.yml` to add or remove AWS metrics.
+- Update alerting rules in `monitoring-config/prometheus_rules.yml`.
+- Customize Grafana dashboards as needed.
+
+## Troubleshooting
+
+- Check logs of `aws_cloudwatch_exporter` container for errors.
+- Verify AWS credentials and permissions.
+- Ensure network connectivity to AWS endpoints.
+
+## References
+
+- [CloudWatch Exporter GitHub](https://github.com/prometheus/cloudwatch_exporter)
+- [Prometheus Documentation](https://prometheus.io/docs/introduction/overview/)
+- [Grafana Documentation](https://grafana.com/docs/)

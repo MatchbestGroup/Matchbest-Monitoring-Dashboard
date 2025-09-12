@@ -11,7 +11,8 @@
 		"level": 1,
 		"sources": [
 			"01K3ZNM5BYJAQH7D2CQ3SDYYX1"
-		]
+		],
+		"failed": true
 	},
 	"version": 1
 }

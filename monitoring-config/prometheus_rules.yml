@@ -18,3 +18,77 @@ groups:
         annotations:
           summary: "Website {{ $labels.instance }} response time is high"
           description: "{{ $labels.instance }} response time is {{ $value }} seconds."
+
+  - name: aws_alerts
+    rules:
+      - alert: EC2HighCPU
+        expr: aws_ec2_cpuutilization_average > 80
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "EC2 instance {{ $labels.instance_id }} high CPU usage"
+          description: "EC2 instance {{ $labels.instance_id }} CPU utilization is {{ $value }}%"
+
+      - alert: EC2VeryHighCPU
+        expr: aws_ec2_cpuutilization_average > 95
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "EC2 instance {{ $labels.instance_id }} very high CPU usage"
+          description: "EC2 instance {{ $labels.instance_id }} CPU utilization is {{ $value }}%"
+
+      - alert: RDSHighCPU
+        expr: aws_rds_cpuutilization_average > 80
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "RDS instance {{ $labels.db_instance_identifier }} high CPU usage"
+          description: "RDS instance {{ $labels.db_instance_identifier }} CPU utilization is {{ $value }}%"
+
+      - alert: RDSLowStorage
+        expr: aws_rds_free_storage_space_average < 1073741824
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "RDS instance {{ $labels.db_instance_identifier }} low storage space"
+          description: "RDS instance {{ $labels.db_instance_identifier }} has less than 1GB free storage"
+
+      - alert: RDSHighConnections
+        expr: aws_rds_database_connections_average > 100
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "RDS instance {{ $labels.db_instance_identifier }} high connection count"
+          description: "RDS instance {{ $labels.db_instance_identifier }} has {{ $value }} connections"
+
+      - alert: ELBHighErrorRate
+        expr: aws_elb_httpcode_backend_5xx_sum / aws_elb_request_count_sum > 0.05
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "ELB {{ $labels.load_balancer }} high 5xx error rate"
+          description: "ELB {{ $labels.load_balancer }} has {{ $value }}% 5xx errors"
+
+      - alert: LambdaHighErrorRate
+        expr: aws_lambda_errors_sum / aws_lambda_invocations_sum > 0.05
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Lambda function {{ $labels.function_name }} high error rate"
+          description: "Lambda function {{ $labels.function_name }} has {{ $value }}% errors"
+
+      - alert: LambdaHighDuration
+        expr: aws_lambda_duration_average > 30000
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Lambda function {{ $labels.function_name }} high duration"
+          description: "Lambda function {{ $labels.function_name }} average duration is {{ $value }}ms"

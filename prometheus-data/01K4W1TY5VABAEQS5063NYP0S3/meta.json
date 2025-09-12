@@ -1,0 +1,17 @@
+{
+	"ulid": "01K4W1TY5VABAEQS5063NYP0S3",
+	"minTime": 1757505600000,
+	"maxTime": 1757512800000,
+	"stats": {
+		"numSamples": 1063877,
+		"numSeries": 3806,
+		"numChunks": 7745
+	},
+	"compaction": {
+		"level": 1,
+		"sources": [
+			"01K4W1TY5VABAEQS5063NYP0S3"
+		]
+	},
+	"version": 1
+}
